@@ -26,30 +26,23 @@
 </head>
 <body>
     <div class="gallery">
-        <img src="images/images/counter/years.png" alt="">
-        <img src="images/images/counter/svg" alt="">
+        <!-- Images will be added here dynamically -->
     </div>
 
     <script>
-        // جلب مجموعة الصور من مجلد images
-        fetch('images/')
+        fetch('images')
             .then(response => response.text())
             .then(text => {
-                // إنشاء عنصر div لتخزين الصور
                 const galleryDiv = document.querySelector('.gallery');
                 
-                // إنشاء مصفوفة لتخزين أسماء الصور
                 const imageNames = text.match(/href="([^"]+\.(jpeg|jpg|gif|png))"/g);
                 
-                // عرض كل صورة في مجلد الصور
                 imageNames.forEach(imageName => {
-                    // إنشاء عنصر img لكل صورة
                     const img = document.createElement('img');
                     img.src = 'images/' + imageName.substring(6, imageName.length - 1);
                     img.alt = 'Image';
-                    // img.loading = 'lazy';
+                    img.loading = 'lazy';
                     
-                    // إضافة الصورة إلى معرض الصور
                     galleryDiv.appendChild(img);
                 });
             })
